@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Vang Lite</title>
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+</head>
+<body>
+
+<h2>Vang Lite</h2>
+
+<label>
+  Button Text:
+  <input id="btnText" value="Take Screenshot">
+</label>
+<br><br>
+
+<button onclick="generate()">Generate Code</button>
+
+<h3>Copy this HTML</h3>
+<textarea id="output" rows="14" cols="60" readonly></textarea>
+
+<script>
+function generate() {
+  const text = document.getElementById('btnText').value;
+
+  const code = `<!-- Screenshot Button -->
+<scr` + `ipt src=\"https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js\"></scr` + `ipt>
+
+<button onclick=\"takeScreenshot()\" style=\"background:#007bff;color:#fff;padding:10px 16px;border:none;cursor:pointer;\">${text}</button>
+
+<scr` + `ipt>
+function takeScreenshot() {
+  html2canvas(document.body).then(function(canvas) {
+    const a = document.createElement('a');
+    a.download = 'screenshot.png';
+    a.href = canvas.toDataURL();
+    a.click();
+  });
+}
+<\/scr` + `ipt>`;
+
+  document.getElementById('output').value = code;
+}
+</script>
+
+
+
+<!-- Footer link -->
+<div style="position:fixed;bottom:10px;left:0;width:100%;text-align:center;font-size:14px;">
+  <a href="https://vangsnap.com" target="_blank" style="color:#555;text-decoration:none;">Powered by VangSnap</a>
+</div>
+
+</body>
+</html>
